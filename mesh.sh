@@ -57,6 +57,12 @@ setup_batman() {
   $BAT_BATCTL_PATH/batctl -m $BAT_SOFT_IFACE if add $BAT_HARD_IFACE
   ip link set dev $BAT_SOFT_IFACE up
   ip addr add $BAT_IP dev $BAT_SOFT_IFACE
+
+  # Insert bat-hosts
+  if [ ! -h /etc/bat-hosts ]; then
+    rm -f /etc/bat-hosts
+    ln -s $(dir $0)/bat-hosts /etc/bat-hosts
+  fi
 }
 
 reset_adhoc() {
