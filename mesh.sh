@@ -63,7 +63,7 @@ setup_batman() {
   ln -s $(dirname $0)/bat-hosts /etc/bat-hosts
 
   # Update /etc/hosts
-  sed -e "/start/,/stop/d" /etc/hosts
+  sed -i -e "/start/,/stop/d" /etc/hosts
   cat $(dirname $0)/hosts >> /etc/hosts
 }
 
