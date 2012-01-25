@@ -59,10 +59,8 @@ setup_batman() {
   ip addr add $BAT_IP dev $BAT_SOFT_IFACE
 
   # Insert bat-hosts
-  if [ ! -h /etc/bat-hosts ]; then
-    rm -f /etc/bat-hosts
-    ln -s $(dirname $0)/bat-hosts /etc/bat-hosts
-  fi
+  rm -f /etc/bat-hosts
+  ln -s $(dirname $0)/bat-hosts /etc/bat-hosts
 }
 
 reset_adhoc() {
