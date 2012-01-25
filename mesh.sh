@@ -61,7 +61,7 @@ setup_batman() {
   # Insert bat-hosts
   if [ ! -h /etc/bat-hosts ]; then
     rm -f /etc/bat-hosts
-    ln -s $(dir $0)/bat-hosts /etc/bat-hosts
+    ln -s $(dirname $0)/bat-hosts /etc/bat-hosts
   fi
 }
 
