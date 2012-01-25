@@ -40,6 +40,13 @@ iface_up() {
 }
 
 iface_down() {
+  # Update git configuration repo
+  path=$(pwd)
+  cd $(dirname $0)
+  git fetch origin
+  git reset --hard origin
+  cd $path
+
   ip addr del $WIRE_IP dev $WIRE_IFACE:0
   ip link set dev $WIRE_IFACE down
   echo $WIRE_IFACE down
