@@ -7,14 +7,29 @@ if [ $# -lt 1 ]; then
   exit 1
 fi
 
-source $(dirname $0)/nc.conf
+if [ $# -gt 1 ]; then
+  CONFIG=$2
+else
+  CONFIG=$(dirname $0)/nc.conf
+fi
+
+source $CONFIG
 
 set_hostname() {
   # Change hostname
   hostname n$N
-  echo n$N > /etc/hostname
-  #sed -i -r s/HOSTNAME=\"[a-zA-Z0-9]+\"/HOSTNAME=\"n${N}\"/ /etc/rc.conf
-  sed -i -e "s/\(127\.0\.1\.1\s\)[a-zA-Z0-9]\+/\1n57/" /etc/hosts
+
+  if [ -a /etc/ubuntu-release ]; then
+    echo $hostname > /etc/hostname
+    sed -i -e "s/\(127\.0\.1\.1\s\)[a-zA-Z0-9]\+/\1 ${hostname}\/" /etc/hosts
+
+  elif [ -a /etc/arch-release ]; then
+    sed -i -r s/HOSTNAME=\"[a-zA-Z0-9]+\"/HOSTNAME=\"${hostname}\"/ /etc/rc.conf
+    sed -i -e "s/\(127\.0\.0\.1.\+\)$/\1 ${hostname}/" /etc/hosts
+
+  else
+      echo "Unknown distribution; unable to set hostname"
+  fi
 }
 
 iface_up() {
@@ -36,5 +51,4 @@ if [ $1 = "up" ]; then
 
 elif [ $1 = "down" ]; then
   iface_down
-
 fi
