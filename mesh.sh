@@ -63,14 +63,8 @@ setup_batman() {
   ln -s $(dirname $0)/bat-hosts /etc/bat-hosts
 
   # Update /etc/hosts
-  if grep "# panda nodes start" /etc/hosts -q; then
-    # Replace current node list
-    sed -e "/start/,/stop/  r $(dirname $0)/hosts " /etc/hosts
-  else
-    # Append node list
-    echo "" >> /etc/hosts
-    cat $(dirname $0)/hosts >> /etc/hosts
-  fi
+  sed -e "/start/,/stop/d" /etc/hosts
+  cat $(dirname $0)/hosts >> /etc/hosts
 }
 
 reset_adhoc() {
