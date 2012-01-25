@@ -61,6 +61,16 @@ setup_batman() {
   # Insert bat-hosts
   rm -f /etc/bat-hosts
   ln -s $(dirname $0)/bat-hosts /etc/bat-hosts
+
+  # Update /etc/hosts
+  if grep "# panda nodes start" /etc/hosts -q; then
+    # Replace current node list
+    sed -e "/start/,/stop/  r $(dirname $0)/hosts " /etc/hosts
+  else
+    # Append node list
+    echo "" >> /etc/hosts
+    cat $(dirname $0)/hosts >> /etc/hosts
+  fi
 }
 
 reset_adhoc() {
