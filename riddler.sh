@@ -23,7 +23,7 @@ start_riddler() {
   git reset --hard origin
 
   # Start riddler node
-  ./node.py --wifi_iface $WIRELESS_IFACE --mesh_host ${BAT_IP%/*} | tee $RD_LOG &
+  ./node.py --wifi_iface $WIRELESS_IFACE --mesh_host ${BAT_IP%/*} &> $RD_LOG &
   if [ $? -eq 0 ]; then
     echo $! > $RD_PID
   fi
