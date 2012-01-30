@@ -11,7 +11,8 @@ source $(dirname $0)/nc.conf
 
 setup_adhoc() {
   # Detect the physical device
-  PHY_IFACE=`iw dev | sed -nE "s/phy#([0-9]+)/phy\1/p"`
+  #PHY_IFACE=`iw dev | sed -nE "s/phy#([0-9]+)/phy\1/p"`
+  PHY_IFACE=phy$(iw dev | pcregrep -M -o1 "phy\#([0-9])+\s+.+\s${WIRELESS_IFACE}")
 
   # Setup wireless interface to ad-hoc
   ip link set dev $WIRELESS_IFACE down
