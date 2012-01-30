@@ -35,6 +35,7 @@ set_hostname() {
 iface_up() {
   ip link set dev $WIRE_IFACE address $WIRE_MAC
   ip link set dev $WIRE_IFACE up
+  dhcpcd $WIRE_IFACE
   ip addr add $WIRE_IP dev $WIRE_IFACE label $WIRE_IFACE:0
   echo $WIRE_IFACE up
 }
@@ -48,6 +49,7 @@ iface_down() {
   cd $path
 
   ip addr del $WIRE_IP dev $WIRE_IFACE:0
+  dhcpcd -k $WIRE_IFACE
   ip link set dev $WIRE_IFACE down
   echo $WIRE_IFACE down
 }
