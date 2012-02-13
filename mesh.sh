@@ -22,7 +22,7 @@ setup_adhoc() {
   ip link set dev $WIRELESS_IFACE txqlen $WIRELESS_QLEN
   iw $WIRELESS_IFACE ibss join $WIRELESS_ESSID $WIRELESS_FREQ $WIRELESS_BSSID
   ip addr add $WIRELESS_IP dev $WIRELESS_IFACE
-  #iw phy $PHY_IFACE set rts $WIRELESS_RTS
+  iw phy $PHY_IFACE set rts $WIRELESS_RTS
 }
 
 update_batman() {
