@@ -22,6 +22,9 @@ start_riddler() {
   git fetch origin
   git reset --hard origin
 
+  # Make sure output from node.py is written immediately
+  export PYTHONUNBUFFERED=1
+
   # Start riddler node
   ./node.py --wifi_iface $WIRELESS_IFACE --mesh_host ${BAT_IP%/*} &> $RD_LOG &
   if [ $? -eq 0 ]; then
