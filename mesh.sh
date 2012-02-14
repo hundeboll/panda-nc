@@ -17,12 +17,13 @@ setup_adhoc() {
   # Setup wireless interface to ad-hoc
   ip link set dev $WIRELESS_IFACE down
   ip link set dev $WIRELESS_IFACE address $WIRELESS_MAC
-  iw $WIRELESS_IFACE set type ibss
+  iw dev $WIRELESS_IFACE set type ibss
   ip link set dev $WIRELESS_IFACE up
   ip link set dev $WIRELESS_IFACE txqlen $WIRELESS_QLEN
   iw $WIRELESS_IFACE ibss join $WIRELESS_ESSID $WIRELESS_FREQ $WIRELESS_BSSID
   ip addr add $WIRELESS_IP dev $WIRELESS_IFACE
   iw phy $PHY_IFACE set rts $WIRELESS_RTS
+  iw dev $WIRELESS_IFACE set bitrates legacy-2.4 $WIRELESS_RATE
 }
 
 update_batman() {
