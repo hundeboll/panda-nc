@@ -23,7 +23,8 @@ setup_adhoc() {
   iw $WIRELESS_IFACE ibss join $WIRELESS_ESSID $WIRELESS_FREQ $WIRELESS_BSSID
   ip addr add $WIRELESS_IP dev $WIRELESS_IFACE
   iw phy $PHY_IFACE set rts $WIRELESS_RTS
-  iw dev $WIRELESS_IFACE set bitrates legacy-2.4 $WIRELESS_RATE
+#  iw dev $WIRELESS_IFACE set bitrates legacy-2.4 $WIRELESS_RATE
+  iwconfig $WIRELESS_IFACE rate ${WIRELESS_RATE}M fixed
 }
 
 update_batman() {
