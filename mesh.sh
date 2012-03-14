@@ -44,7 +44,8 @@ update_batman() {
   if ! make -j2 --quiet \
       CONFIG_BATMAN_ADV_STATS=y \
       CONFIG_BATMAN_ADV_NC=y \
-      CONFIG_BATMAN_ADV_DEBUG=y
+      CONFIG_BATMAN_ADV_DEBUG=y \
+      CONFIG_BATMAN_ADV_DAT=n
   then
     echo "Compiling batman-adv module failed"
     exit 1
