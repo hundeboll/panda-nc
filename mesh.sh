@@ -16,7 +16,7 @@ setup_adhoc() {
 
   # Setup wireless interface to ad-hoc
   ip link set dev $WIRELESS_IFACE down
-  #ip link set dev $WIRELESS_IFACE address $WIRELESS_MAC
+  ip link set dev $WIRELESS_IFACE address $WIRELESS_MAC
   iw dev $WIRELESS_IFACE set type ibss
   ip link set dev $WIRELESS_IFACE up
   ip link set dev $WIRELESS_IFACE txqlen $WIRELESS_QLEN
