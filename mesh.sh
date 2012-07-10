@@ -69,9 +69,9 @@ setup_batman() {
   # Update /etc/hosts
   sed -i -e "/start/,/stop/d" /etc/hosts
   cat $(dirname $0)/hosts >> /etc/hosts
-  if [ "$N" == "7" ]; then
+  if [ "$N" == "57" ]; then
       echo 5c:d9:98:f7:1e:a7 allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
-  elif [ "$N" == "8" ]; then
+  elif [ "$N" == "58" ]; then
       echo 7e:78:47:8c:26:57 allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
   fi
 }
