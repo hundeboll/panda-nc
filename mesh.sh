@@ -23,7 +23,7 @@ setup_adhoc() {
   iw $WIRELESS_IFACE ibss join $WIRELESS_ESSID $WIRELESS_FREQ $WIRELESS_BSSID
   ip addr add $WIRELESS_IP dev $WIRELESS_IFACE
   #iw phy $PHY_IFACE set rts $WIRELESS_RTS
-  iw dev $WIRELESS_IFACE set bitrates legacy-2.4 $WIRELESS_RATE
+  #iw dev $WIRELESS_IFACE set bitrates legacy-2.4 $WIRELESS_RATE
   #iwconfig $WIRELESS_IFACE rate ${WIRELESS_RATE}M fixed
 }
 
@@ -69,6 +69,11 @@ setup_batman() {
   # Update /etc/hosts
   sed -i -e "/start/,/stop/d" /etc/hosts
   cat $(dirname $0)/hosts >> /etc/hosts
+  if [ "$N" == "7" ]; then
+      echo 5c:d9:98:f7:1e:a7 allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
+  elif [ "$N" == "8" ]; then
+      echo 7e:78:47:8c:26:57 allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
+  fi
 }
 
 reset_adhoc() {
