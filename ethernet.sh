@@ -36,7 +36,7 @@ iface_up() {
   ip link set dev $WIRE_IFACE address $WIRE_MAC
   ip link set dev $WIRE_IFACE up
   dhcpcd $WIRE_IFACE
-  /usr/bin/ntpd -gdn 2>&1 > /var/log/myntpd.log
+  /usr/bin/ntpd -gdn 2>&1 > /var/log/myntpd.log &
   ip addr add $WIRE_IP dev $WIRE_IFACE label $WIRE_IFACE:0
   echo $WIRE_IFACE up
 }
