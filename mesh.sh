@@ -71,8 +71,8 @@ setup_batman() {
   cat $(dirname $0)/hosts >> /etc/hosts
   if [ "$N" == "57" ]; then
       echo 70:72:cf:28:1c:0a allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
-  elif [ "$N" == "58" ]; then
-      echo 70:72:cf:28:19:d6 allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
+  elif [ "$N" == "56" ]; then
+      echo 70:72:cf:28:19:5a allow > /sys/kernel/debug/batman_adv/bat0/block_ogm
   fi
 }
 
